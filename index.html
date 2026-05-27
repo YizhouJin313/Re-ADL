@@ -1,16 +1,298 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>my homepage</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
-        h1 { color: #333; }
-    </style>
+    <meta charset="utf-8">
+    <meta name="description" content="ReADL: Reasoning-Driven Anomaly Detection and Localization with Image-Level Supervision">
+    <meta name="keywords" content="Anomaly Detection, MLLM, Reasoning, Localization, CVPR 2026">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReADL | CVPR 2026</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.4/dist/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.4/dist/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
 </head>
+
 <body>
-    <h1>CVPR26</h1>
-    
-    <p><a href="https://github.com/YizhouJin313/ReADL">[code]</a></p >
+    <nav class="top-nav">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#bibtex">BibTeX</a>
+    </nav>
+
+    <!-- Title -->
+    <section class="hero publication-hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="hero-panel">
+                    <div class="hero-header">
+                        <div class="hero-kicker">
+                            <span class="venue-badge">CVPR 2026</span>
+                            <span class="paper-type">Project Page</span>
+                            <span class="hero-resource-links">
+                                <a href="CVPR26_jyz_camera_ready_final_0326_v2.pdf" class="hero-resource-link primary-resource-link">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <span>Paper</span>
+                                </a>
+                                <a href="https://arxiv.org/abs/2603.27179" class="hero-resource-link">
+                                    <i class="ai ai-arxiv"></i>
+                                    <span>arXiv</span>
+                                </a>
+                                <a href="https://github.com/YizhouJin313/ReADL" class="hero-resource-link">
+                                    <i class="fab fa-github"></i>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+                        </div>
+                        <h1 class="title publication-title">
+                            Reasoning-Driven Anomaly Detection and Localization with Image-Level Supervision
+                        </h1>
+                        <div class="hero-authors publication-authors">
+                            <div class="author-list">
+                                <span class="author-block"><a href="https://github.com/YizhouJin313">Yizhou Jin</a><sup>1,2</sup>,</span>
+                                <span class="author-block">Yuezhu Feng<sup>1</sup>,</span>
+                                <span class="author-block">Jinjin Zhang<sup>1</sup>,</span>
+                                <span class="author-block">Peng Wang<sup>1</sup>,</span>
+                                <span class="author-block">Qingjie Liu<sup>1,2*</sup>,</span>
+                                <span class="author-block">Yunhong Wang<sup>1,2*</sup></span>
+                            </div>
+                            <div class="hero-affiliations">
+                                <span><sup>1</sup>State Key Laboratory of Virtual Reality Technology and Systems, Beihang University</span>
+                                <span><sup>2</sup>Hangzhou Innovation Institute, Beihang University</span>
+                                <span><sup>*</sup>Joint corresponding authors</span>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-feature-row">
+                            <div class="hero-feature-item proof-red">
+                                <i class="fa-regular fa-circle-xmark"></i>
+                                <span>No external vision modules</span>
+                            </div>
+                            <div class="hero-feature-item proof-green">
+                                <i class="fa-regular fa-image"></i>
+                                <span>No dense labels</span>
+                            </div>
+                            <div class="hero-feature-item proof-blue">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <span>Reasoning-guided localization</span>
+                            </div>
+                        </div>
+                        <div class="content has-text-justified hero-motivation-text">
+                            <p>
+                                MLLMs inherently contain latent localization cues in reasoning tokens. Can we automatically
+                                identify anomaly-relevant tokens (e.g. &ldquo;scratch&rdquo;, &ldquo;mark&rdquo;) and leverage their attention for
+                                pixel-level localization? Can we further activate this intrinsic potential to jointly improve
+                                detection, localization, and interpretability under limited supervision?
+                            </p>
+                        </div>
+                        <figure class="paper-figure hero-motivation-figure">
+                            <img src="static/images/motivation.png" alt="Overview of the ReADL framework">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Abstract -->
+    <section class="section" id="overview">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 section-title">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Multimodal large language models (MLLMs) have recently demonstrated remarkable reasoning and perceptual abilities for anomaly detection. 
+                            However, most approaches remain confined to image-level anomaly detection and textual reasoning, while pixel-level localization still relies on external vision modules and dense annotations.
+In this work, we activate the intrinsic reasoning potential of MLLMs to perform anomaly detection, pixel-level localization, and interpretable reasoning solely from image-level supervision, without any auxiliary components or pixel-wise labels.
+Specifically, we propose <strong>Re</strong>asoning-Driven <strong>A</strong>nomaly <strong>L</strong>ocalization (ReAL), which extracts anomaly-related tokens from the autoregressive reasoning process and aggregates their attention responses to produce pixel-level anomaly maps.
+We further introduce a <strong>C</strong>onsistency-<strong>G</strong>uided <strong>R</strong>easoning <strong>O</strong>ptimization (CGRO) module that leverages reinforcement learning to align reasoning tokens with visual attentions, resulting in more coherent reasoning and accurate anomaly localization.
+Extensive experiments on four public benchmarks demonstrate that our method significantly improves anomaly detection, localization, and interpretability.
+Remarkably, despite relying solely on image-level supervision, our approach achieves performance competitive with MLLM-based methods trained under dense pixel-level supervision.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Contributions -->
+    <section class="section compact-section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 section-title">Key Contributions</h2>
+                    <div class="content has-text-justified contribution-list">
+                        <ul>
+                            <li><strong>End-to-end anomaly understanding.</strong> ReADL unifies image-level detection,
+                                pixel-level localization, and natural-language reasoning without auxiliary vision modules.</li>
+                            <li><strong>Reasoning-driven localization.</strong> ReAL identifies anomaly-relevant tokens by
+                                combining semantic relevance and spatial entropy, then aggregates their visual attention maps.</li>
+                            <li><strong>Consistency-guided optimization.</strong> CGRO uses reinforcement learning with a
+                                reasoning-localization consistency reward to align textual evidence and visual attention.</li>
+                            <li><strong>Strong zero-shot generalization.</strong> On four public benchmarks, ReADL reaches
+                                competitive localization performance despite using only image-level supervision.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section method-section" id="method">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 section-title">Overall Pipeline</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Given an input image, the MLLM generates a structured reasoning process and a final anomaly
+                            answer. ReAL selects anomaly-related reasoning tokens and aggregates their visual attentions
+                            into a pixel-level anomaly map. During training, CGRO reinforces answers that are accurate,
+                            well-formed, and visually consistent with the regions described in the reasoning.
+                        </p>
+                    </div>
+                    <figure class="paper-figure">
+                        <img src="static/images/framework.png" alt="Overview of the ReADL framework">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section results-section" id="results">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 section-title">Quantitative Results</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            ReADL is evaluated in a zero-shot setting on MVTec-AD, WFDD, SDD, and DTD. It uses image-level
+                            supervision only, yet obtains strong detection, the best average pixel-level AUROC among
+                            compared MLLM-based localization systems, and the highest reasoning quality on MVTec-COT.
+                        </p>
+                    </div>
+                    <div class="result-highlights">
+                        <div><strong>83.9</strong><span>Image AUROC</span></div>
+                        <div><strong>86.9</strong><span>Image ACC</span></div>
+                        <div><strong>80.7</strong><span>Pixel AUROC</span></div>
+                        <div><strong>97.1</strong><span>Pixel ACC</span></div>
+                    </div>
+                    <figure class="paper-figure">
+                        <img src="static/images/results.png" alt="Quantitative comparison across detection, localization, and reasoning">
+                        <figcaption>
+                            Average zero-shot performance. Detection is reported as AUROC/ACC, reasoning as ROUGE-L/SBERT.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section visualization-section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3 section-title">Visualization Results</h2>
+                    <div class="visual-block">
+                        <h3 class="title is-4 visual-title">ReAL Module Visualization</h3>
+                        <div class="content has-text-justified">
+                            <p>
+                                Not every reasoning token is useful for localization. ReAL filters tokens that are both
+                                semantically tied to anomaly concepts and spatially focused, producing sharper maps than
+                                naive aggregation over the full reasoning sequence.
+                            </p>
+                        </div>
+                        <figure class="paper-figure narrow-figure">
+                            <img src="static/images/ReAL.png" alt="Token selection and visual attention aggregation in ReAL">
+                            <figcaption>
+                                Composite token selection removes irrelevant reasoning tokens and preserves visual evidence for defects.
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="visual-block">
+                        <h3 class="title is-4 visual-title">CGRO Module Visualization</h3>
+                    <div class="content has-text-justified">
+                        <p>
+                            CGRO reduces reasoning-answer contradictions and concentrates visual attention on true
+                            defects. The resulting explanations describe what is anomalous while the heatmaps show where
+                            the defect appears.
+                        </p>
+                    </div>
+                    <figure class="paper-figure">
+                        <img src="static/images/qualitative.png" alt="Qualitative anomaly reasoning and localization comparisons">
+                        <figcaption>
+                            Compared with base and R1-optimized models, CGRO yields more consistent reasoning and focused localization.
+                        </figcaption>
+                    </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BibTeX -->
+    <section class="section" id="bibtex">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">BibTeX</h2>
+                    <div class="content has-text-left">
+                        <pre style="background: #f5f5f5; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px;">
+@inproceedings{jin2026readl,
+  title     = {Reasoning-Driven Anomaly Detection and Localization
+               with Image-Level Supervision},
+  author    = {Jin, Yizhou and Feng, Yuezhu and Zhang, Jinjin and
+               Wang, Peng and Liu, Qingjie and Wang, Yunhong},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer
+               Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Acknowledgements -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Acknowledgements</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            This work is supported by Beijing Municipal Science and Technology Commission,
+                            Administrative Commission of Zhongguancun Science Park (L242105).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="padding: 20px;">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    Website template adapted from
+                    <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+
 </body>
+
 </html>
